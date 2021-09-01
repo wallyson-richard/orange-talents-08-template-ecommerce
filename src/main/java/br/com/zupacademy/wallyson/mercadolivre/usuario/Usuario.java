@@ -1,5 +1,6 @@
 package br.com.zupacademy.wallyson.mercadolivre.usuario;
 
+import br.com.zupacademy.wallyson.mercadolivre.validations.annotations.Unique;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.Entity;
@@ -28,7 +29,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(@NotBlank @Email String login, @NotBlank @Size(min = 6) String senha) {
+    public Usuario(@NotBlank @Email @Unique(entity = Usuario.class, attribute = "login") String login,
+                   @NotBlank @Size(min = 6) String senha) {
         this.login = login;
         this.senha = BCrypt.hashpw(senha, BCrypt.gensalt());
     }
