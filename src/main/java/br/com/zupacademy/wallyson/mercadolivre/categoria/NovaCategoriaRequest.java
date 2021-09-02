@@ -24,12 +24,11 @@ public class NovaCategoriaRequest {
     }
 
     public Categoria toModel(CategoriaRepository categoriaRepository) {
-        if (categoriaId != null) {
-            Optional<Categoria> categoria = categoriaRepository.findById(categoriaId);
-            if (categoria.isPresent()) {
-                return new Categoria(nome, categoria.get());
-            }
+        if (categoriaId == null) {
+            new Categoria(nome);
         }
-        return new Categoria(nome);
+
+        Optional<Categoria> categoria = categoriaRepository.findById(categoriaId);
+        return categoria.map(categoria1 -> new Categoria(nome, categoria1)).orElse(new Categoria(nome));
     }
 }

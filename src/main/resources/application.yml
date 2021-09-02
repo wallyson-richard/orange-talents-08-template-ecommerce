@@ -8,3 +8,6 @@ spring:
       ddl-auto: update
     show-sql: true
     format-sql: true
+jwt:
+  expiration: 86400000
+  secret: "3456b372a3f83b937937475da1065a9c7484146735dad160dd4386626e87911c0e094b6b48da34ee2c48794bfd622f38cb943e5a4f43fada8b559381f1a5c317"
