@@ -1,15 +1,11 @@
 package br.com.zupacademy.wallyson.mercadolivre.validations.validators;
 
-import br.com.zupacademy.wallyson.mercadolivre.categoria.Categoria;
 import br.com.zupacademy.wallyson.mercadolivre.validations.annotations.Exist;
-import br.com.zupacademy.wallyson.mercadolivre.validations.annotations.Unique;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import javax.validation.constraints.NotBlank;
 
 public class ExistValidator implements ConstraintValidator<Exist, Object> {
 

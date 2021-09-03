@@ -3,6 +3,7 @@ package br.com.zupacademy.wallyson.mercadolivre.produto.caracteristica;
 import br.com.zupacademy.wallyson.mercadolivre.produto.Produto;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Caracteristica {
@@ -11,8 +12,10 @@ public class Caracteristica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String nome;
 
+    @NotBlank
     private String descricao;
 
     @ManyToOne
@@ -22,7 +25,7 @@ public class Caracteristica {
     public Caracteristica() {
     }
 
-    public Caracteristica(String nome, String descricao) {
+    public Caracteristica(@NotBlank String nome, @NotBlank String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }

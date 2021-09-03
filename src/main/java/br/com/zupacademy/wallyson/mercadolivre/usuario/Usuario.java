@@ -22,8 +22,12 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Email
     private String login;
 
+    @NotBlank
+    @Size(min = 6)
     private String senha;
 
     private LocalDateTime createdAt = LocalDateTime.now();
