@@ -1,4 +1,4 @@
-package br.com.zupacademy.wallyson.mercadolivre.pergunta;
+package br.com.zupacademy.wallyson.mercadolivre.produto.pergunta;
 
 import br.com.zupacademy.wallyson.mercadolivre.produto.Produto;
 import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;

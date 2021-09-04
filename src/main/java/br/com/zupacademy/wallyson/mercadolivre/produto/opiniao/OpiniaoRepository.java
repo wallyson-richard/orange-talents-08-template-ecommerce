@@ -1,4 +1,4 @@
-package br.com.zupacademy.wallyson.mercadolivre.opiniao;
+package br.com.zupacademy.wallyson.mercadolivre.produto.opiniao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

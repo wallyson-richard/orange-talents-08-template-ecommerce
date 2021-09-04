@@ -1,4 +1,4 @@
-package br.com.zupacademy.wallyson.mercadolivre.produto;
+package br.com.zupacademy.wallyson.mercadolivre.produto.imagem;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

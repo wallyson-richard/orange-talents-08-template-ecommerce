@@ -1,9 +1,7 @@
-package br.com.zupacademy.wallyson.mercadolivre.opiniao;
+package br.com.zupacademy.wallyson.mercadolivre.produto.opiniao;
 
 import br.com.zupacademy.wallyson.mercadolivre.produto.Produto;
-import br.com.zupacademy.wallyson.mercadolivre.produto.ProdutoRepository;
 import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;
-import br.com.zupacademy.wallyson.mercadolivre.validations.annotations.Exist;
 
 import javax.validation.constraints.*;
 

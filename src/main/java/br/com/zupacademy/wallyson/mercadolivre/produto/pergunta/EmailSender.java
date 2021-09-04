@@ -1,4 +1,4 @@
-package br.com.zupacademy.wallyson.mercadolivre.pergunta;
+package br.com.zupacademy.wallyson.mercadolivre.produto.pergunta;
 
 public interface EmailSender {
     void enviar(Pergunta pergunta);

@@ -2,6 +2,7 @@ package br.com.zupacademy.wallyson.mercadolivre.produto;
 
 import br.com.zupacademy.wallyson.mercadolivre.categoria.CategoriaRepository;
 import br.com.zupacademy.wallyson.mercadolivre.produto.imagem.NovasImagensRequest;
+import br.com.zupacademy.wallyson.mercadolivre.produto.imagem.Uploader;
 import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
