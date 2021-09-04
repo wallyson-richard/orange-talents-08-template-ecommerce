@@ -20,20 +20,13 @@ public class NovaOpiniaoRequest {
     @NotBlank
     private String descricao;
 
-    @NotNull
-    @Exist(entity = Produto.class)
-    private Long produtoId;
-
-    public NovaOpiniaoRequest(Byte nota, String titulo, String descricao, Long produtoId) {
+    public NovaOpiniaoRequest(Byte nota, String titulo, String descricao) {
         this.nota = nota;
         this.titulo = titulo;
         this.descricao = descricao;
-        this.produtoId = produtoId;
     }
 
-    public Opiniao toModel(ProdutoRepository produtoRepository, Usuario usuario) {
-        return produtoRepository.findById(produtoId).map(produto -> {
-            return new Opiniao(nota, titulo, descricao, usuario, produto);
-        }).orElseThrow(() -> new IllegalArgumentException("Produto informado não existe."));
+    public Opiniao toModel(Produto produto, Usuario usuario) {
+        return new Opiniao(nota, titulo, descricao, usuario, produto);
     }
 }

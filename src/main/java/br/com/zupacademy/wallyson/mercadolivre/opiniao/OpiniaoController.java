@@ -1,17 +1,20 @@
 package br.com.zupacademy.wallyson.mercadolivre.opiniao;
 
+import br.com.zupacademy.wallyson.mercadolivre.exceptionhandler.ErrorResponse;
+import br.com.zupacademy.wallyson.mercadolivre.produto.Produto;
 import br.com.zupacademy.wallyson.mercadolivre.produto.ProdutoRepository;
 import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/opinioes")
+@RequestMapping("/produtos")
 public class OpiniaoController {
 
     private final OpiniaoRepository opiniaoRepository;
@@ -22,9 +25,21 @@ public class OpiniaoController {
         this.produtoRepository = produtoRepository;
     }
 
-    @PostMapping
-    public void save(@RequestBody @Valid NovaOpiniaoRequest request, @AuthenticationPrincipal Usuario usuario) {
-        Opiniao opiniao = request.toModel(produtoRepository, usuario);
-        opiniaoRepository.save(opiniao);
+    @PostMapping("/{id}/opinioes")
+    public ResponseEntity<?> save(@PathVariable Long id, @RequestBody @Valid NovaOpiniaoRequest request,
+                               @AuthenticationPrincipal Usuario usuario) {
+        Optional<Produto> produtoSaved = produtoRepository.findById(id);
+
+        if (produtoSaved.isEmpty()) {
+            ErrorResponse error = new ErrorResponse("produto", "Produto informado não existe");
+            return ResponseEntity.badRequest().body(error);
+        }
+
+        produtoSaved.ifPresent(produto -> {
+            Opiniao opiniao = request.toModel(produto, usuario);
+            opiniaoRepository.save(opiniao);
+        });
+
+        return ResponseEntity.ok().build();
     }
 }
