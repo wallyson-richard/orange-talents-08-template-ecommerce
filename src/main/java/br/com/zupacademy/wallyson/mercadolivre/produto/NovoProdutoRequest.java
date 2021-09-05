@@ -2,7 +2,6 @@ package br.com.zupacademy.wallyson.mercadolivre.produto;
 
 import br.com.zupacademy.wallyson.mercadolivre.categoria.Categoria;
 import br.com.zupacademy.wallyson.mercadolivre.categoria.CategoriaRepository;
-import br.com.zupacademy.wallyson.mercadolivre.produto.caracteristica.Caracteristica;
 import br.com.zupacademy.wallyson.mercadolivre.produto.caracteristica.NovaCaracteristicaRequest;
 import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;
 import br.com.zupacademy.wallyson.mercadolivre.validations.annotations.Exist;
@@ -11,7 +10,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class NovoProdutoRequest {
 
@@ -64,12 +62,8 @@ public class NovoProdutoRequest {
     }
 
     public Produto toModel(CategoriaRepository categoriaRepository, Usuario usuario) {
-        Set<Caracteristica> caracteristicaList = caracteristicas.stream()
-                .map(NovaCaracteristicaRequest::toModel)
-                .collect(Collectors.toSet());
-
         return categoriaRepository.findById(categoriaId)
-                .map(categoria -> new Produto(nome, valor, quantidade, descricao, categoria, caracteristicaList, usuario))
+                .map(categoria -> new Produto(nome, valor, quantidade, descricao, categoria, caracteristicas, usuario))
                 .orElseThrow(() -> new IllegalArgumentException("Informe uma categoria válida."));
     }
 }

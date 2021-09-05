@@ -28,9 +28,17 @@ public class Pergunta {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Deprecated
+    public Pergunta() {
+    }
+
     public Pergunta(@NotBlank String titulo, @NotNull Produto produto, @NotNull Usuario usuario) {
         this.titulo = titulo;
         this.produto = produto;
         this.usuario = usuario;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 }

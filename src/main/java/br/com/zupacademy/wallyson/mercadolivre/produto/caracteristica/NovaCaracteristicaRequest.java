@@ -1,5 +1,7 @@
 package br.com.zupacademy.wallyson.mercadolivre.produto.caracteristica;
 
+import br.com.zupacademy.wallyson.mercadolivre.produto.Produto;
+
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
@@ -19,8 +21,8 @@ public class NovaCaracteristicaRequest {
         return descricao;
     }
 
-    public Caracteristica toModel() {
-        return new Caracteristica(nome, descricao);
+    public Caracteristica toModel(Produto produto) {
+        return new Caracteristica(nome, descricao, produto);
     }
 
     @Override

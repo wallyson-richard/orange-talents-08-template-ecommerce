@@ -4,6 +4,7 @@ import br.com.zupacademy.wallyson.mercadolivre.produto.Produto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Caracteristica {
@@ -15,6 +16,7 @@ public class Caracteristica {
     @NotBlank
     private String nome;
 
+    @NotNull
     @NotBlank
     private String descricao;
 
@@ -25,8 +27,17 @@ public class Caracteristica {
     public Caracteristica() {
     }
 
-    public Caracteristica(@NotBlank String nome, @NotBlank String descricao) {
+    public Caracteristica(@NotBlank String nome, @NotBlank String descricao, @NotNull Produto produto) {
         this.nome = nome;
         this.descricao = descricao;
+        this.produto = produto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 }
