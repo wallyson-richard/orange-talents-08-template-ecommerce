@@ -2,6 +2,7 @@ package br.com.zupacademy.wallyson.mercadolivre.produto.pergunta;
 
 import br.com.zupacademy.wallyson.mercadolivre.exceptionhandler.ErrorResponse;
 import br.com.zupacademy.wallyson.mercadolivre.produto.ProdutoRepository;
+import br.com.zupacademy.wallyson.mercadolivre.sender.EmailSender;
 import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -37,7 +38,7 @@ public class PerguntaController {
         produtoSaved.ifPresent(produto -> {
             var pergunta = request.toModel(produto, usuario);
             pergunta = perguntaRepository.save(pergunta);
-            emailSender.enviar(pergunta);
+            emailSender.perguntaCadastrada(pergunta);
         });
 
         return ResponseEntity.ok().build();

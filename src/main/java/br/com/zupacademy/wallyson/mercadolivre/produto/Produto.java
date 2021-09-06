@@ -138,4 +138,12 @@ public class Produto {
                 .map(nota -> (double) nota)
                 .collect(Collectors.toList());
     }
+
+    public boolean diminuirEstoque(Long quantidade) {
+        if (this.quantidade >= quantidade) {
+            this.quantidade -= quantidade;
+            return true;
+        }
+        return false;
+    }
 }
