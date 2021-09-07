@@ -7,4 +7,8 @@ public interface EmailSender {
     void perguntaCadastrada(Pergunta pergunta);
 
     void compraRealizada(Compra compra);
+
+    void pagamentoAprovado(Compra compra);
+
+    void pagamentoRecusado(Compra compra);
 }

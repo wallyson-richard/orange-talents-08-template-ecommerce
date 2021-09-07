@@ -16,4 +16,14 @@ public class EmailSenderFakeImpl implements EmailSender {
     public void compraRealizada(Compra compra) {
         System.out.printf("Compra realizada com sucesso:  %s\n", compra);
     }
+
+    @Override
+    public void pagamentoAprovado(Compra compra) {
+        System.out.printf("Pagamento aprovado com sucesso: %s\n", compra);
+    }
+
+    @Override
+    public void pagamentoRecusado(Compra compra) {
+        System.out.printf("Pagamento recusado: %s\n", compra);
+    }
 }
