@@ -15,12 +15,9 @@ public class NovaCategoriaRequest {
     @Exist(entity = Categoria.class, optional = true)
     private Long categoriaId;
 
-    public String getNome() {
-        return nome;
-    }
-
-    public Long getCategoriaId() {
-        return categoriaId;
+    public NovaCategoriaRequest(String nome, Long categoriaId) {
+        this.nome = nome;
+        this.categoriaId = categoriaId;
     }
 
     public Categoria toModel(CategoriaRepository categoriaRepository) {
