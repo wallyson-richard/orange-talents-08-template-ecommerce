@@ -17,12 +17,9 @@ public class NovoUsuarioRequest {
     @Size(min = 6)
     private String senha;
 
-    public String getLogin() {
-        return login;
-    }
-
-    public String getSenha() {
-        return senha;
+    public NovoUsuarioRequest(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
     }
 
     public Usuario toModel() {
