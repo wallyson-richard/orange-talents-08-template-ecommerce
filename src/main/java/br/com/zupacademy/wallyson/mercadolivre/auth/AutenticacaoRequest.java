@@ -12,12 +12,9 @@ public class AutenticacaoRequest {
     @NotBlank
     private String senha;
 
-    public String getLogin() {
-        return login;
-    }
-
-    public String getSenha() {
-        return senha;
+    public AutenticacaoRequest(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
     }
 
     public UsernamePasswordAuthenticationToken toModel() {
