@@ -1,21 +1,26 @@
 package br.com.zupacademy.wallyson.mercadolivre.validations.validators;
 
-import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;
-import br.com.zupacademy.wallyson.mercadolivre.usuario.UsuarioRepository;
+import br.com.zupacademy.wallyson.mercadolivre.compartilhado.AtributoUnico;
+import br.com.zupacademy.wallyson.mercadolivre.novousuario.Usuario;
+import br.com.zupacademy.wallyson.mercadolivre.novousuario.UsuarioRepository;
 import br.com.zupacademy.wallyson.mercadolivre.validations.annotations.Unique;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Set;
 
+@Transactional
 @SpringBootTest
 @ActiveProfiles("test")
+@AutoConfigureMockMvc
 public class UniqueValidatorTest {
 
     @Autowired
@@ -64,7 +69,7 @@ public class UniqueValidatorTest {
     }
 
     static class Entity {
-        @Unique(entity = Usuario.class, attribute = "login")
+        @Unique(AtributoUnico.USUARIO_LOGIN)
         private String login;
 
         public Entity(String login) {
@@ -73,7 +78,7 @@ public class UniqueValidatorTest {
     }
 
     static class EntityAttributeOptional {
-        @Unique(entity = Usuario.class, attribute = "login", optional = true)
+        @Unique(value = AtributoUnico.USUARIO_LOGIN, optional = true)
         private String login;
 
         public EntityAttributeOptional(String login) {

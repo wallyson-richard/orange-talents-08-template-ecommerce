@@ -1,7 +1,9 @@
 package br.com.zupacademy.wallyson.mercadolivre.auth;
 
-import br.com.zupacademy.wallyson.mercadolivre.usuario.NovoUsuarioRequest;
-import br.com.zupacademy.wallyson.mercadolivre.usuario.UsuarioRepository;
+import br.com.zupacademy.wallyson.mercadolivre.authenticate.AutenticacaoRequest;
+import br.com.zupacademy.wallyson.mercadolivre.authenticate.AutenticacaoResponse;
+import br.com.zupacademy.wallyson.mercadolivre.novousuario.NovoUsuarioRequest;
+import br.com.zupacademy.wallyson.mercadolivre.novousuario.UsuarioRepository;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,8 +58,8 @@ public class AutenticacaoControllerTest {
     public void naoAutenticarUsuarioComDadosIncorretos() throws Exception {
         var usuarioRequest = new NovoUsuarioRequest("wallyson@email.com", "123456");
         mockMvc.perform(post("/usuarios")
-                        .content(gson.toJson(usuarioRequest))
-                        .contentType(MediaType.APPLICATION_JSON));
+                .content(gson.toJson(usuarioRequest))
+                .contentType(MediaType.APPLICATION_JSON));
 
         var autenticacaoRequest = new AutenticacaoRequest("wallyson@email.com", "1234567");
         mockMvc.perform(post("/auth")
@@ -71,8 +73,8 @@ public class AutenticacaoControllerTest {
         var usuarioRequest = new NovoUsuarioRequest("wallyson@email.com", "123456");
 
         mockMvc.perform(post("/usuarios")
-                        .content(gson.toJson(usuarioRequest))
-                        .contentType(MediaType.APPLICATION_JSON));
+                .content(gson.toJson(usuarioRequest))
+                .contentType(MediaType.APPLICATION_JSON));
 
         var autenticacaoRequest = new AutenticacaoRequest("wallyson@email.com", "123456");
 
@@ -83,7 +85,7 @@ public class AutenticacaoControllerTest {
 
         var json = mvcResult.getResponse().getContentAsString();
         var body = gson.fromJson(json, AutenticacaoResponse.class);
-        var bearer = String.format("%s %s",body.getTipo(), body.getToken());
+        var bearer = String.format("%s %s", body.getTipo(), body.getToken());
         mockMvc.perform(post("/auth")
                         .content(gson.toJson(autenticacaoRequest))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -109,7 +111,7 @@ public class AutenticacaoControllerTest {
 
         var json = mvcResult.getResponse().getContentAsString();
         var body = gson.fromJson(json, AutenticacaoResponse.class);
-        var bearer = String.format("%s %s1",body.getTipo(), body.getToken());
+        var bearer = String.format("%s %s1", body.getTipo(), body.getToken());
         mockMvc.perform(post("/auth")
                         .content(gson.toJson(autenticacaoRequest))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -117,5 +119,4 @@ public class AutenticacaoControllerTest {
                 .andExpect(status().isOk());
 
     }
-
 }

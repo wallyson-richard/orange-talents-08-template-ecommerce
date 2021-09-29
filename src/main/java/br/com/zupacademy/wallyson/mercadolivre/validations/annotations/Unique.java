@@ -1,5 +1,6 @@
 package br.com.zupacademy.wallyson.mercadolivre.validations.annotations;
 
+import br.com.zupacademy.wallyson.mercadolivre.compartilhado.AtributoUnico;
 import br.com.zupacademy.wallyson.mercadolivre.validations.validators.UniqueValidator;
 
 import javax.validation.Constraint;
@@ -19,9 +20,7 @@ public @interface Unique {
 
     Class<? extends Payload>[] payload() default {};
 
-    Class<?> entity();
-
-    String attribute();
+    AtributoUnico value();
 
     boolean optional() default false;
 }

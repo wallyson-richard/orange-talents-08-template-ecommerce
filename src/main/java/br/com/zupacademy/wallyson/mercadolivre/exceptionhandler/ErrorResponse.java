@@ -3,7 +3,7 @@ package br.com.zupacademy.wallyson.mercadolivre.exceptionhandler;
 public class ErrorResponse {
 
     private String campo;
-    private final String mensagem;
+    private String mensagem;
 
     public ErrorResponse(String campo, String mensagem) {
         this.campo = campo;

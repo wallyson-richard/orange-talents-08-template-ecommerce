@@ -1,5 +1,7 @@
 package br.com.zupacademy.wallyson.mercadolivre.usuario;
 
+import br.com.zupacademy.wallyson.mercadolivre.novousuario.NovoUsuarioRequest;
+import br.com.zupacademy.wallyson.mercadolivre.novousuario.UsuarioRepository;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,12 +12,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.transaction.Transactional;
 import java.util.Locale;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -44,7 +48,7 @@ public class UsuarioControllerTest {
     }
 
     @Test
-    public void naoCadastrarUsuarioComLoginInvalido() throws Exception {
+    public void naoDeveCadastrarUsuarioComLoginInvalido() throws Exception {
         var usuarioRequest = new NovoUsuarioRequest("wallysonemail.com", "123456");
         mockMvc.perform(post("/usuarios")
                 .content(gson.toJson(usuarioRequest))
@@ -55,7 +59,7 @@ public class UsuarioControllerTest {
                 .andExpect(status().isBadRequest());
     }
     @Test
-    public void naoCadastrarUsuarioComSenhaInvalida() throws Exception {
+    public void naoDeveCadastrarUsuarioComSenhaInvalida() throws Exception {
         var usuarioRequest = new NovoUsuarioRequest("wallyson@email.com", "12345");
         mockMvc.perform(post("/usuarios")
                         .content(gson.toJson(usuarioRequest))

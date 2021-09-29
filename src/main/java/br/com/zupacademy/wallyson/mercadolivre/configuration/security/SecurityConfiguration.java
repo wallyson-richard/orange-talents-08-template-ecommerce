@@ -1,9 +1,11 @@
 package br.com.zupacademy.wallyson.mercadolivre.configuration.security;
 
-import br.com.zupacademy.wallyson.mercadolivre.auth.AuthenticationService;
-import br.com.zupacademy.wallyson.mercadolivre.auth.JwtAuthenticationFilter;
-import br.com.zupacademy.wallyson.mercadolivre.auth.TokenService;
+import br.com.zupacademy.wallyson.mercadolivre.authenticate.AuthenticationService;
+import br.com.zupacademy.wallyson.mercadolivre.authenticate.JwtAuthenticationFilter;
+import br.com.zupacademy.wallyson.mercadolivre.authenticate.TokenService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,13 +21,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationService authenticationService;
-    private final TokenService tokenService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    public SecurityConfiguration(AuthenticationService authenticationService, TokenService tokenService) {
-        this.authenticationService = authenticationService;
-        this.tokenService = tokenService;
-    }
+    @Autowired
+    private TokenService tokenService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -1,12 +1,13 @@
 package br.com.zupacademy.wallyson.mercadolivre.produto;
 
-import br.com.zupacademy.wallyson.mercadolivre.categoria.Categoria;
-import br.com.zupacademy.wallyson.mercadolivre.produto.caracteristica.Caracteristica;
-import br.com.zupacademy.wallyson.mercadolivre.produto.caracteristica.NovaCaracteristicaRequest;
-import br.com.zupacademy.wallyson.mercadolivre.produto.imagem.ImagemProduto;
-import br.com.zupacademy.wallyson.mercadolivre.produto.opiniao.Opiniao;
-import br.com.zupacademy.wallyson.mercadolivre.produto.pergunta.Pergunta;
-import br.com.zupacademy.wallyson.mercadolivre.usuario.Usuario;
+import br.com.zupacademy.wallyson.mercadolivre.compartilhado.exceptions.InvalidUserException;
+import br.com.zupacademy.wallyson.mercadolivre.novacategoria.Categoria;
+import br.com.zupacademy.wallyson.mercadolivre.produto.novacaracteristica.Caracteristica;
+import br.com.zupacademy.wallyson.mercadolivre.produto.novacaracteristica.NovaCaracteristicaRequest;
+import br.com.zupacademy.wallyson.mercadolivre.produto.novaimagem.ImagemProduto;
+import br.com.zupacademy.wallyson.mercadolivre.produto.novaopiniao.Opiniao;
+import br.com.zupacademy.wallyson.mercadolivre.produto.novapergunta.Pergunta;
+import br.com.zupacademy.wallyson.mercadolivre.novousuario.Usuario;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -36,7 +37,7 @@ public class Produto {
     @PositiveOrZero
     private Long quantidade;
 
-    @NotNull
+    @NotBlank
     @Size(max = 1000)
     private String descricao;
 
@@ -111,7 +112,7 @@ public class Produto {
         return perguntas;
     }
 
-    public void adicionarImagem(Set<String> urls) {
+    public void adicionarImagens(Set<String> urls) {
         Set<ImagemProduto> imagens = urls.stream()
                 .map(url -> new ImagemProduto(url, this))
                 .collect(Collectors.toSet());
@@ -119,8 +120,10 @@ public class Produto {
         this.imagens.addAll(imagens);
     }
 
-    public boolean pertenceAoUsuario(Usuario usuario) {
-        return this.usuario.equals(usuario);
+    public void validarUsuario(Usuario usuario) {
+        if (!this.usuario.equals(usuario)) {
+            throw new InvalidUserException("O produto não pertcence ao usuário informado.");
+        }
     }
 
     public double calcularMediaNota() {

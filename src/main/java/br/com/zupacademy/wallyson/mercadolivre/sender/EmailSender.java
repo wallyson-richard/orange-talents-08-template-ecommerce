@@ -1,7 +1,7 @@
 package br.com.zupacademy.wallyson.mercadolivre.sender;
 
-import br.com.zupacademy.wallyson.mercadolivre.compra.Compra;
-import br.com.zupacademy.wallyson.mercadolivre.produto.pergunta.Pergunta;
+import br.com.zupacademy.wallyson.mercadolivre.novacompra.Compra;
+import br.com.zupacademy.wallyson.mercadolivre.produto.novapergunta.Pergunta;
 
 public interface EmailSender {
     void perguntaCadastrada(Pergunta pergunta);
